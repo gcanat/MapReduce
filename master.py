@@ -167,10 +167,10 @@ def deploy_file(file, host, target_path, source_host):
     else:
         cmd = ["scp", file, f"canat-20@{host}:{target_path}"]
         stdout, stderr = send_remote_cmd(host, cmd, SSH_TIMEOUT)
-        # if stderr != "":
-        # wait_time = random.randint(5, 10)
-        # time.sleep(wait_time)
-        # stdout, stderr = send_remote_cmd(host, cmd, SSH_TIMEOUT)
+        if stderr != "":
+            wait_time = random.randint(1, 5)
+            time.sleep(wait_time)
+            stdout, stderr = send_remote_cmd(host, cmd, SSH_TIMEOUT)
     return stdout, stderr
 
 
